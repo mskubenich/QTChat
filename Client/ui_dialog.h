@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading ui file 'dialog.ui'
 **
-** Created: Tue Jun 3 19:58:56 2014
+** Created: Mon Jun 9 12:27:50 2014
 **      by: Qt User Interface Compiler version 4.4.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling ui file!
@@ -35,6 +35,7 @@ public:
     QListWidget *lwUsers;
     QPlainTextEdit *pteMessage;
     QVBoxLayout *verticalLayout;
+    QSpinBox *passwordSpinBox;
     QLineEdit *leHost;
     QSpinBox *sbPort;
     QLineEdit *leName;
@@ -74,6 +75,12 @@ public:
     verticalLayout = new QVBoxLayout();
     verticalLayout->setSpacing(6);
     verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+    passwordSpinBox = new QSpinBox(Dialog);
+    passwordSpinBox->setObjectName(QString::fromUtf8("passwordSpinBox"));
+    passwordSpinBox->setMaximum(999999999);
+
+    verticalLayout->addWidget(passwordSpinBox);
+
     leHost = new QLineEdit(Dialog);
     leHost->setObjectName(QString::fromUtf8("leHost"));
 

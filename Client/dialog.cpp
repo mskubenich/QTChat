@@ -3,6 +3,7 @@
 
 #include <QtGui>
 #include <QDebug>
+#include "simplecrypt.h"
 
 Dialog::Dialog(QWidget *parent) :QDialog(parent),ui(new Ui::Dialog)
 {
@@ -93,7 +94,13 @@ void Dialog::onSokReadyRead()
             in >> user;
             QString message;
             in >> message;
-            AddToLog("["+user+"]: "+message);
+
+			//Set The Encryption And Decryption Key
+        	SimpleCrypt processSimpleCrypt(ui->passwordSpinBox->value());
+        	//Decrypt
+        	QString decryptedMessage = processSimpleCrypt.decryptToString(message);
+
+            AddToLog("["+user+"]: "+decryptedMessage);
         }
         break;
         case MyClient::comMessageToUsers:
@@ -102,7 +109,13 @@ void Dialog::onSokReadyRead()
             in >> user;
             QString message;
             in >> message;
-            AddToLog("["+user+"](private): "+message, Qt::blue);
+
+			//Set The Encryption And Decryption Key
+        	SimpleCrypt processSimpleCrypt(ui->passwordSpinBox->value());
+        	//Decrypt
+        	QString decryptedMessage = processSimpleCrypt.decryptToString(message);
+
+            AddToLog("["+user+"](private): "+decryptedMessage, Qt::blue);
         }
         break;
         case MyClient::comPrivateServerMessage:
@@ -210,8 +223,12 @@ void Dialog::on_pbSend_clicked()
         s.remove(s.length()-1, 1);
         out << s;
     }
+    //Set The Encryption And Decryption Key
+    SimpleCrypt processSimpleCrypt(ui->passwordSpinBox->value());
+    //Encrypt
+    QString encryptedString = processSimpleCrypt.encryptToString(ui->pteMessage->toPlainText());
 
-    out << ui->pteMessage->document()->toPlainText();
+    out << encryptedString;
     out.device()->seek(0);
     out << (quint16)(block.size() - sizeof(quint16));
     _sok->write(block);

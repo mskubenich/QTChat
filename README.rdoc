@@ -1,1 +1,5 @@
-Simple local network chat
+= Simple local network chat
+C++ : http://en.wikipedia.org/wiki/C%2B%2B
+QT Framework : http://qt-project.org/
+Simple Crypt : http://qt-project.org/wiki/Simple_encryption
+cryptographic hash function - Sha1 : http://en.wikipedia.org/wiki/SHA-1
